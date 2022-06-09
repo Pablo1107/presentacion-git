@@ -143,7 +143,7 @@ En cada commit se mantiene una referencia de un subarbol que contiene
 la informacion de los archivos de ese commit y pueden referenciar
 contenido compartido con otros commits. De esta forma evita tener que
 almacenar una copia duplicada de todos los archivos por commit.
-#+ATTR_HTML: :width 1000px
+#+ATTR_HTML: :width 700px
 [[file:assets/git-arbol-2.jpg]]
 
 
@@ -178,7 +178,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 _Untracked files_ son archivos que todavia no pertenecen al repositorio
 
-** Agregar archivos
+** Agregar un archivo
 #+begin_src bash :results output
 git add presentacion.org
 git status
@@ -200,10 +200,39 @@ Untracked files:
 
 #+end_example
 
+** Commit
+#+begin_src bash :results output
+git commit -m "agrego presentacion.org"
+#+end_src
 
-* Bla bla
+#+RESULTS:
+: [master (root-commit) 7e1162b] agrego presentacion.org
+:  1 file changed, 211 insertions(+)
+:  create mode 100644 presentacion.org
 
-asdas
+_Nota:_ correr solo ~git commit~ usara el editor que este configurado
+en la variable de entorno ~EDITOR~
+
+** Como escribir un mensaje de commit
+
+[[file:assets/git_commit_2x.png]]
+
+Un mensaje de commit deberia describir lo mas comprensiblemente
+posible el cambio que se esta _intentando_ agregar al repo.
+
+(Por mas que mas de una vez lo unico que estemos agregando sea mas bugs)
+
+La realidad es que muchas veces uno escribe un mensaje corto y
+generico, les dejo un articulo que habla un poco de esto para el que
+le interese.
+
+https://cbea.ms/git-commit/
+
+** Agregemos todos los archivos que quedan
+#+begin_src bash :results output
+git add -A
+git status
+#+end_src
 
 * Referencias
 
