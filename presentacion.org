@@ -1,0 +1,211 @@
+#+title: Git
+#+author: Pablo Andres Dealbera
+
+* Intro
+
+Hoy vamos a ver una herramienta muy usada en el desarrollo de software.
+
+*Git*
+
+* Version Control (Control de Versiones)
+
+#+ATTR_HTML: :width 1000px
+[[file:assets/trabajo-final-meme.png]]
+
+* VCS - Version Control System (Sistema de Control de Versiones)
+
+Es un software o conjuntos de herramientas que permite gestionar el
+versionado de archivos de forma ordenada.
+
+Estos pueden ser:
+ - Centralizados
+   - CVS (1990)
+   - Apache Subversion (SVN, 2000)
+
+ - Distribuidos
+   - Mercurial (2005)
+   - Git (2005)
+
+** ¿Que es git?
+
+Git es un Sistema de Control de Versiones y fue diseñado para ser
+usado en el flujo de desarrollo del Kernel de Linux.
+
+#+ATTR_HTML: :width 1000px
+[[file:assets/git.png]]
+
+* Git
+Ahora vamos a ver algunos conceptos basicos...
+
+_Nota:_ importante saber que todos los conceptos que estamos viendo
+hoy aplican a la utilidad Git y no necesitamos de ningun servicio para
+poder usarlo (GitHub, GitLab, BitBucket, etc)
+
+** Conceptos basicos
+
+#+ATTR_HTML: :width 1000px
+[[file:assets/git-101.jpeg]]
+
+*** Repositorio
+Un repositorio en Git no es mas que una carpeta que contiene un
+directorio oculto ~.git/~ donde se almacenan todos los archivos
+gestionados por el sistema.
+
+#+begin_src bash :results output
+tree .git
+#+end_src
+#+RESULTS:
+#+begin_example
+.git
+├── branches
+├── config
+├── description
+├── HEAD
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── pre-merge-commit.sample
+│   ├── prepare-commit-msg.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   ├── push-to-checkout.sample
+│   └── update.sample
+├── info
+│   └── exclude
+├── objects
+│   ├── info
+│   └── pack
+└── refs
+    ├── heads
+    └── tags
+
+9 directories, 17 files
+#+end_example
+
+*** Commit
+
+Un commit representa un cambio hecho a nuestro repositorio. Git
+utiliza commits para mantener registros de todos los cambios hechos
+durante el ciclo de vida de un repo y contiene metadata acerca de
+quien realizo los cambios, cuando, y que cambios hizo sobre que archivos.
+
+#+begin_src bash :results output
+git show
+#+end_src
+
+#+RESULTS:
+: commit e236cfb49f83b8135ded4d71b44117e184c9a2da
+: Author: Pablo Andres Dealbera <pdealbera@fi.uba.ar>
+: Date:   Thu Jun 9 01:12:15 2022 -0300
+: 
+:     Initial commit
+
+*** Areas
+
+Para git no todos los archivos son iguales, por eso distingue en areas
+donde estan estos archivos, en principio hay tres areas:
+
+ - *Working Directory*
+   Archivos que estan realmente en la carpeta en este momento.
+ - *Staging Area*
+   Archivos que estan preparados para ser _commiteados_.
+ - *Repository*
+   Archivos que pertecen al repo y por lo tanto estan asociados a
+   algun commit.
+
+**** Working Directory
+
+Estos son los archivos que estan en la carpeta del repo, y a su vez
+los podemos distinguir entre:
+
+ - *Untracked files*
+   Archivos que no forman parte del repositorio en ningun estado. Para
+   git estos archivos _no existen_ a menos que los agregemos.
+ - *Ignored files*
+   Son archivos que estan listados en algun archivo oculto ~.gitignore~.
+   Parecido a _Untracked files_ con la diferencia de que estos ni
+   aparecen en ~git status~ ni pueden ser accidentalmente agregados al repo.
+ - *Changed files*
+   Son archivos que pertenecen al repo pero han sufrido un cambio.
+
+* Un repositorio es un arbol donde cada nodo es un commit
+
+Habiendo visto arboles, esta estructura le sonara familiar. Eso es
+porque Git internamente maneja arboles para procesar los cambios de
+cada archivo.
+
+En cada commit se mantiene una referencia de un subarbol que contiene
+la informacion de los archivos de ese commit y pueden referenciar
+contenido compartido con otros commits. De esta forma evita tener que
+almacenar una copia duplicada de todos los archivos por commit.
+#+ATTR_HTML: :width 1000px
+[[file:assets/git-arbol-2.jpg]]
+
+
+* A lo importante, ¿como usarlo?
+
+** Iniciar un repositorio
+Podemos ir a un directorio vacio y correr:
+#+begin_src bash :results output
+git init
+#+end_src
+#+RESULTS:
+: Initialized empty Git repository in <algun-lugar>/algoritmos-programacion-II/colab/clases/git/.git/
+
+** Estado del repositorio
+#+begin_src bash :results output
+git status
+#+end_src
+
+#+RESULTS:
+#+begin_example
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	assets/
+	presentacion.org
+
+nothing added to commit but untracked files present (use "git add" to track)
+#+end_example
+
+_Untracked files_ son archivos que todavia no pertenecen al repositorio
+
+** Agregar archivos
+#+begin_src bash :results output
+git add presentacion.org
+git status
+#+end_src
+
+#+RESULTS:
+#+begin_example
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+	new file:   presentacion.org
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	assets/
+
+#+end_example
+
+
+* Bla bla
+
+asdas
+
+* Referencias
+
+https://www.youtube.com/watch?v=uR6G2v_WsRA
+https://iq.opengenus.org/how-git-uses-trees-data-structure-concepts/
