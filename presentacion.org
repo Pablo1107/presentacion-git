@@ -234,7 +234,116 @@ git add -A
 git status
 #+end_src
 
+#+RESULTS:
+#+begin_example
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   assets/git-101.jpeg
+	new file:   assets/git-arbol-2.jpg
+	new file:   assets/git-arbol.jpg
+	new file:   assets/git.png
+	new file:   assets/git_commit_2x.png
+	new file:   assets/trabajo-final-meme.png
+	modified:   presentacion.org
+
+#+end_example
+
+** Archivos modificados
+Oh, aparte de tener nuevos archivos (los que estaban en la carpeta
+~assets/~ tambien hemos modificado ~presentacion.org~.
+
+Podemos ver que modificacion le hicimos corriendo ~git diff~
+
+_Nota:_ corriendo este comando solo veremos los cambios que estan en
+el working directory, si el archivo ya esta en staging podemos usar el
+argumento ~--staged~ para ver esos cambios especificamente.
+
+#+begin_src bash :results output
+git diff presentacion.org
+#+end_src
+
+#+RESULTS:
+#+begin_example
+diff --git a/presentacion.org b/presentacion.org
+index 8858fce..ee80e76 100644
+--- a/presentacion.org
++++ b/presentacion.org
+@@ -234,6 +234,31 @@ git add -A
+ git status
+ ,#+end_src
+ 
++#+RESULTS:
++#+begin_example
++On branch master
++Changes to be committed:
++  (use "git restore --staged <file>..." to unstage)
++	new file:   assets/git-101.jpeg
++	new file:   assets/git-arbol-2.jpg
++	new file:   assets/git-arbol.jpg
++	new file:   assets/git.png
++	new file:   assets/git_commit_2x.png
++	new file:   assets/trabajo-final-meme.png
++	modified:   presentacion.org
++
++#+end_example
++
++** Archivos modificados
++Oh, aparte de tener nuevos archivos (los que estaban en la carpeta
++~assets/~ tambien hemos modificado ~presentacion.org~.
++
++Podemos ver que modificacion le hicimos corriendo ~git diff~
++
++#+begin_src bash :results output
++git diff presentacion.org
++#+end_src
++
+ ,* Referencias
+ 
+ https://www.youtube.com/watch?v=uR6G2v_WsRA
+#+end_example
+
+** Otro commit
+#+begin_src bash :results output
+git commit -m "agrego assets/ y cambio presentacion.org"
+#+end_src
+
+#+RESULTS:
+: [master a68713c] agrego assets/ y cambio presentacion.org
+:  7 files changed, 33 insertions(+), 4 deletions(-)
+:  create mode 100644 assets/git-101.jpeg
+:  create mode 100644 assets/git-arbol-2.jpg
+:  create mode 100644 assets/git-arbol.jpg
+:  create mode 100644 assets/git.png
+:  create mode 100644 assets/git_commit_2x.png
+:  create mode 100644 assets/trabajo-final-meme.png
+
+** Log de commits
+#+begin_src bash :results output
+git log
+#+end_src
+
+#+RESULTS:
+#+begin_example
+commit a68713c06a286273a505095c8a9049c3be4b73e7
+Author: Pablo Andres Dealbera <dealberapablo07@gmail.com>
+Date:   Thu Jun 9 16:16:43 2022 -0300
+
+    agrego assets/ y cambio presentacion.org
+
+commit 7e1162bf439f1f2b539bcdd52b06bd8029c42b27
+Author: Pablo Andres Dealbera <dealberapablo07@gmail.com>
+Date:   Thu Jun 9 16:05:16 2022 -0300
+
+    agrego presentacion.org
+#+end_example
+
+** Resto de la demo
+
+Bueno, vayamos a una terminal enserio.
+
 * Referencias
 
+https://www.youtube.com/watch?v=X05dAcd57MY
 https://www.youtube.com/watch?v=uR6G2v_WsRA
 https://iq.opengenus.org/how-git-uses-trees-data-structure-concepts/
